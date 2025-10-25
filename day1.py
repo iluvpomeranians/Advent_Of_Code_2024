@@ -21,11 +21,14 @@ for line in lines:
 (first_col).sort()
 (second_col).sort()
 
-def compare_lists(list1, list2):
+def compare_lists(list1, list2) -> list[int]:
     return [abs(int(list1[idx]) - int(list2[idx])) for idx, list1[idx] in enumerate(list1) if idx < len(list2)]
 
+def sum_list(input_list) -> int:
+    return sum(int(x) for x in input_list if x is not None)
 
 if __name__ == "__main__":
     # print(first_col)
     # print(second_col)
-    print(compare_lists(first_col, second_col))
+    distances = compare_lists(first_col, second_col)
+    print(sum_list(distances))
