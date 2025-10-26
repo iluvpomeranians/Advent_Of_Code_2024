@@ -48,7 +48,6 @@ if __name__ == "__main__":
     distances = compare_lists(first_col, second_col)
     print(f"PART A: {sum_list(distances)}")
 
-
     # Part B
     similarity_score = similarity(unsorted_first_col, unsorted_second_col)
     print(f"PART B: {similarity_score}")
