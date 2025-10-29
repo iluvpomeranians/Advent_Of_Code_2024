@@ -81,44 +81,6 @@ def update_correction(incorrect_updates) -> int:
     return total
 
 
-def update_correction_v2(incorrect_updates) -> int:
-    total = 0
-    idx = 0
-
-    while idx < len(incorrect_updates):
-        update_list = incorrect_updates[idx]
-        print(f"Processing {update_list} @ {idx}")
-
-        valid = True
-
-        for i, val in enumerate(update_list):
-            follow_list = rules_dict.get(val)
-            if follow_list:
-                for follow_val in follow_list:
-                    # If this follow_val appears *before* val, it's out of order
-                    if follow_val in update_list[:i]:
-                        # Rearrange and retry
-                        newlist = update_list.copy()
-                        j = update_list.index(follow_val)
-                        newlist.insert(i + 1, newlist.pop(j))
-                        incorrect_updates[idx] = newlist
-
-                        print(f"Reprocessing same index {idx} with new order: {newlist}")
-                        valid = False
-                        break
-
-                if not valid:
-                    break  # break out of inner loop to retry this update
-
-        if valid:
-            # If update is now valid, count its middle value
-            total += int(update_list[len(update_list) // 2])
-            idx += 1  # only move to next update if current one is valid
-
-    print(f"Total: {total}")
-    return total
-
-
 
 if __name__ == "__main__":
     print(f"PART A: {analyze_updates()}\n")
